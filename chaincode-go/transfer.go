@@ -1,7 +1,3 @@
-/*
-SPDX-License-Identifier: Apache-2.0
-*/
-
 package main
 
 import (
@@ -9,7 +5,6 @@ import (
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 	"github.com/hanifff/fabric-samples/my-off-cc/chaincode-go/chaincode"
-	//"github.com/hyperledger/fabric-samples/my-off-cc/chaincode-go/chaincode"
 )
 
 func main() {
