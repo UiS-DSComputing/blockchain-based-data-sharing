@@ -31,7 +31,7 @@ If you are using Fabric's test network, you need to put this project in the `Git
 `./network.sh deployCC -ccn basic -ccp ../my-simple-offchain/chaincode-go -ccl go`<br/>
 `cd fabric-samples/my-simple-offchain/application-go`</br>
 `go run offApp.go`<br/>
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 #### Good luck :-)
