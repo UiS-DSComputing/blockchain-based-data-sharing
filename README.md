@@ -4,7 +4,7 @@ This project is a demo application for experiment with [Hyperledger](https://www
 
 ### To compiling our demo projcet
 
-This application is implemented in [Go](https://golang.org/), and we use an instance MySql server API to communicate with database.<br/>
+This project is implemented in [Go](https://golang.org/). In addition, we have implemneted an API to an communicate with a MySql server.<br/>
 You need to have a fabric network running with at least two peer organizations and an ordering service.<br/>
 However, fabric provides a [test network](https://hyperledger-fabric.readthedocs.io/en/release-2.2/test_network.html) which you can run locally and has all required configurations. In the following, we list the requirements for compiling this application:<br>
 
