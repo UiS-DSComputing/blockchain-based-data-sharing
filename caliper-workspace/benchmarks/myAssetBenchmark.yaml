@@ -1,0 +1,26 @@
+test:
+    name: my-asset-benchmark
+    description: test benchmark
+    workers:
+      type: local
+      number: 2
+    rounds:
+      - label: queryAsset
+        description: Query asset benchmark
+        chaincodeId: basic
+        txDuration: 30
+        rateControl: 
+          type: fixed-backlog
+          opts:
+            unfinished_per_client: 2
+        callback: benchmarks/callbacks/queryAssetBenchmarks.js
+        arguments:
+          assets: 10
+  
+monitor:
+  type:
+  - none
+  
+observer:
+  type: local
+  interval: 5
