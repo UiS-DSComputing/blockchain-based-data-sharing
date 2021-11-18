@@ -30,3 +30,6 @@ external-chaincode/
 # Eclipse
 .classpath
 .settings
+
+#node
+node_modules
