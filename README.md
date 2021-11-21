@@ -25,7 +25,8 @@ However, fabric provides a [test network](https://hyperledger-fabric.readthedocs
 
 Start the MySql server by `/your-path-to-bin/mysql -u username -p password`, by replacing username and password with yours.<br>
 If you are using Fabric's test network, you need to put this project in the `Github/your-user-name/fabric-samples/my-simple-offchain/` directory. Then use the following commands to start the test network, configure a channel, deploy the chaincode, and start the application server:<br/>
-````shell
+
+```shell
 cd fabric-samples/test-network 
 ./network.sh up
 ./network.sh createChannel -c mychannel -ca
