@@ -12,19 +12,28 @@ The size of data set varies as follow:<br>
 --------------------------------------------------------------------------------------------------------------------------------------------------
 ## Requiremnts
 Install the Fabric tools and add them to PATH:<br/>
-`curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.0 1.4.8 -s` <br/>
-`export PATH=$PATH:$(pwd)/bin`<br/>
+```shell
+curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.2.0 1.4.8 -s
+export PATH=$PATH:$(pwd)/bin
+```
 Create and initialize the network:<br/>
-`./startFabric.sh`<br/>
+```shell
+./startFabric.sh
+```
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 ## Run the benchmarking module
-`cd caliper-worksapce`<br/>
+```shell
+cd caliper-worksapce
+```
 Use the Caliper CLI to run the benchmarking module:<br/>
-`npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled --caliper-report-path ./report.html`<br/>
-You can find the `report.html` in the parent directory.
+```shell
+npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled --caliper-report-path ./report.html
+```
+
+You can find a `report.html` file in the parent directory.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
