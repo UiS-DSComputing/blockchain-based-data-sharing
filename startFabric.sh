@@ -36,6 +36,7 @@ Next to start the application:
     cd application-go
 
   Then, install dependencies and run the test using:
-    go run offApp.go
+    go build 
+    ./application-go
 
 EOF

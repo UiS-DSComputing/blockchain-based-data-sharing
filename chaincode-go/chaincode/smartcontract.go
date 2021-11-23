@@ -26,7 +26,6 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 	// TODO: ask from command line to make assets
 	assets := []Asset{
 		{ID: "hash of the data", Owner: "Hanif"},
-		//{ID: "asset6", Color: "white", Size: 15, Owner: "Michel", AppraisedValue: 800},
 	}
 
 	for _, asset := range assets {

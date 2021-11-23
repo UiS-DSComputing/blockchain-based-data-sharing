@@ -15,9 +15,9 @@ organizations:
       certificates:
       - name: 'User1'
         clientPrivateKey:
-          path: /home/ubuntu/go/src/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/ef17876ec26d5499849d9f90f830d586738bca8729a88b9e1dd0aeef6ab09a29_sk
+          path: ../../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/1978c4abe7a231ab7e0234d1ba133c9e5f8104fcc9d5f216d50fa6f37dc4828c_sk
         clientSignedCert:
-          path: '/home/ubuntu/go/src/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem'
+          path: ../../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem
     connectionProfile:
-      path: '/home/ubuntu/go/src/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+      path: ../../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml
       discover: true

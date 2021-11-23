@@ -3,6 +3,8 @@
 
 This project is a demo application for experiment with [Hyperledger](https://www.hyperledger.org/) blockchain technology. We specifically design an off-chain storage model, where we use a [MySql](https://www.mysql.com/) database to store data and submit light-weighted transactions to the blockchain with only the hash of data.<br/>
 
+Please be aware that we are making some changes to the samples given by Fabric to develop our chaincode, application, and caliper-workspace. But, the main concepts and structure is taken from the [Fabric-samples](https://github.com/hyperledger/fabric-samples), [test-network](https://hyperledger-fabric.readthedocs.io/en/release-2.2/test_network.html), and [caliper-workspace](https://hyperledger.github.io/caliper/v0.4.2/getting-started/) examples and instructions.<br>
+
 
 
 ### To compiling our demo projcet
@@ -32,7 +34,22 @@ cd fabric-samples/test-network
 ./network.sh createChannel -c mychannel -ca
 ./network.sh deployCC -ccn basic -ccp ../my-simple-offchain/chaincode-go -ccl go
 cd fabric-samples/my-simple-offchain/application-go
-go run offApp.go
+go build
+./application-go
+```
+
+Alternatively, you can use the script shell file to setup all configurations mentioned above:<br>
+
+```shell
+cd fabric-samples/my-simple-offchain
+./start.sh
+```
+
+
+You can shot down the network and delete all its dependencies using the following command:<br>
+
+```shell
+./shotdown.sh
 ```
 
 
