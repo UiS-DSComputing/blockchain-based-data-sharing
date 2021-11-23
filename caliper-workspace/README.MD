@@ -1,4 +1,4 @@
-# Benchmarks
+# Caliper Benchmark Module
 
 
 You can also use our benchmarking module to benchamrk our chaincode.<br>
@@ -9,7 +9,11 @@ The size of data set varies as follow:<br>
 - 500 bytes
 - 1000 bytes 
 
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Requiremnts
 
 Install the Fabric tools and add them to PATH:<br/>
@@ -29,9 +33,9 @@ cd fabric-samples/my-simple-offchain
 The fabric test network generates a new secret key every time we start the network. Thus, after you set up the test-network, channel, and deploy the chaincode you need to replace the "clientPrivateKey" key in the ./networks/networkConfig.yaml file with the new generated secret key in the same path. 
 
 
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 ## Run the benchmarking module
 
