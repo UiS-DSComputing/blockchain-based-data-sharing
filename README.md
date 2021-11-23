@@ -3,7 +3,7 @@
 
 This project is a demo application for experiment with [Hyperledger](https://www.hyperledger.org/) blockchain technology. We specifically design an off-chain storage model, where we use a [MySql](https://www.mysql.com/) database to store data and submit light-weighted transactions to the blockchain with only the hash of data.<br/>
 
-Please be aware that we are making some changes to the samples given by Fabric to develop our chaincode, application, and caliper-workspace. But, the main concepts and structure is taken from the [Fabric-samples](https://github.com/hyperledger/fabric-samples), [test-network](https://hyperledger-fabric.readthedocs.io/en/release-2.2/test_network.html), and [caliper-workspace](https://hyperledger.github.io/caliper/v0.4.2/getting-started/) examples and instructions.<br>
+Please be aware that this project contains a Fabric chaincode, application, and a Caliper benchmark module, but, the main concepts and structure is taken from the [Fabric-samples](https://github.com/hyperledger/fabric-samples), [test-network](https://hyperledger-fabric.readthedocs.io/en/release-2.2/test_network.html), and [caliper-workspace](https://hyperledger.github.io/caliper/v0.4.2/getting-started/) examples and instructions.<br>
 
 
 
