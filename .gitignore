@@ -33,3 +33,9 @@ external-chaincode/
 
 #node
 node_modules
+
+/vendor
+
+
+# caliper
+caliper.log
