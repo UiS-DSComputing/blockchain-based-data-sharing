@@ -30,9 +30,6 @@ cd fabric-samples/my-simple-offchain
 ./start.sh
 ```
 
-The fabric test network generates a new secret key every time we start the network. Thus, after you set up the test-network, channel, and deploy the chaincode you need to replace the "clientPrivateKey" key in the ./networks/networkConfig.yaml file with the new generated secret key in the same path. 
-
-
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
