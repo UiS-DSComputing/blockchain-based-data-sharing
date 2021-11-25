@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Exit on first error
+set -e
+
+
+# launch network; create channel, join peers with the channel, and add third org
+pushd ../test-network
+./network.sh down
+./network.sh up createChannel -ca -s couchdb
+popd
+
+pushd ../test-network/addOrg3
+./addOrg3.sh up -c channel1
+popd
+
+pushd ../test-network
+./network.sh deployCC -ccn basic -ccv 1 -cci initLedger -ccl go -ccp ../my-off-cc/chaincode-go
+
+
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=$PWD/../config/
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org3MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+export CORE_PEER_ADDRESS=localhost:11051
+
+# package the chaincode on org3
+peer lifecycle chaincode package basic.tar.gz --path ../my-off-cc/chaincode-go --lang golang --label basic_1
+# install the chain code on org3
+peer lifecycle chaincode install basic.tar.gz
+
+# query packageID
+peer lifecycle chaincode queryinstalled
+# TODO set the env to the packageID, like so:
+# export CC_PACKAGE_ID=basic_1:5443b5b557efd3faece8723883d28d6f7026c0bf12245de109b89c5c4fe64887
+
+# approve the  a definition of the the chaincode for Org3
+# use the --package-id flag to provide the package identifier
+# use the --init-required flag to request the ``Init`` function be invoked to initialize the chaincode
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" --channelID mychannel --name basic --version 1 --package-id $CC_PACKAGE_ID --sequence 1 --init-required
+
+# verify chaincode definition
+# use the --name flag to select the chaincode whose definition you want to query
+peer lifecycle chaincode querycommitted --channelID mychannel --name basic --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem"
+
+# get endoresment from two orgs
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" --peerAddresses localhost:11051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt" -c '{"function":"InitLedger","Args":[]}'
+# veirfy
+peer chaincode query -C mychannel -n basic -c '{"Args":["GetAllAssets"]}'
+popd
+
+<<cat EOF
+Succefully added the third org and deployed chaincode on it.    
+EOF

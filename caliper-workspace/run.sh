@@ -15,6 +15,39 @@ declare -a tps=('25' '50' '100' '200')
 python3 -c "import bench_config; bench_config.reconfig_network()"
 
 
+
+# add the third organisation and deploye it on the channel
+# ../my-off-cc/addOrg.sh
+# benchmark for network 3 org
+
+declare -a tps=('25' '50' '100' '200')
+export COLLECTION_TYPE="data1024B"
+export NR_OF_CLINETS="10"
+
+for h in "${tps[@]}"; do
+    export TPS_Caliper="$h"
+    echo "Running tests for 3 organisations with tps: $h"
+    # rewrite the benchmark configuration 
+    python3 -c  "import bench_config; bench_config.reconfig_benchmark()"
+    # sleep for 10 second for configuration to be applied
+    sleep 5
+    # run the caliper cli
+    npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml \
+    --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
+    --caliper-report-path results/report_3org_1024kb_10cli_"$h"_tps.html
+    # sleep for 5 sec before restarting
+    sleep 5
+done
+
+
+# benchmark by changing block size from preffered default vlaue of 500  (batch timeut from default value of 2s, with three orgs)
+
+
+
+
+
+cat <<EOF
+
 for i in "${sizes[@]}"; do
     export COLLECTION_TYPE="$i"
     for j in "${clients[@]}"; do
@@ -37,34 +70,8 @@ for i in "${sizes[@]}"; do
 done
 
 
-# benchmark by adding an org
-
-dataSize='data1024b'
-nrOfclients='10'
-declare -a tps=('25' '50' '100' '200')
-export COLLECTION_TYPE=dataSize
-export NR_OF_CLINETS=nrOfclients
-
-for h in "${tps[@]}"; do
-    export TPS_Caliper="$h"
-    echo "Running tests for tps: $h"
-    # rewrite the benchmark configuration 
-    python3 -c  "import bench_config; bench_config.reconfig_benchmark()"
-    # sleep for 10 second for configuration to be applied
-    sleep 5
-    # run the caliper cli
-    npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml \
-    --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
-    --caliper-report-path results/report_3org_1024kb_10cli_"$h"_tps.html
-    # sleep for 5 sec before restarting
-    sleep 5
-done
 
 
-# benchmark by changing block size
-# Benchmark different blocksize x,x,x with the same datasize and nrofclients, vary tps
-
-cat <<EOF
 
 Total setup execution time : $(($(date +%s) - starttime)) secs ...
 
