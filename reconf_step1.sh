@@ -7,6 +7,9 @@ pushd ../test-network
 
 
 # fecth with ordere as admin
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=${PWD}/../config/
+
 export CORE_PEER_LOCALMSPID="OrdererMSP"
 export CH_NAME="mychannel"
 export TLS_ROOT_CA=${PWD}/organizations/ordererOrganizations/example.com/users/Admin@example.com/tls/ca.crt

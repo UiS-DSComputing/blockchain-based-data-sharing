@@ -6,6 +6,9 @@ set -e
 
 pushd ../test-network
 
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=${PWD}/../config/
+
 # Sumbit changes as orderer admin
 export CH_NAME="mychannel"
 
