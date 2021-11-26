@@ -14,6 +14,7 @@ pushd ../test-network/addOrg3
 ./addOrg3.sh up -c mychannel -s couchdb
 popd
 
+
 pushd ../test-network
 ./network.sh deployCC -ccn basic -ccv 1 -cci initLedger -ccl go -ccp ../my-off-cc/chaincode-go
 
@@ -35,8 +36,8 @@ peer lifecycle chaincode install basic.tar.gz
 peer lifecycle chaincode queryinstalled
 
 
-read -p "press enter the packageID" packageID 
-export CC_PACKAGE_ID=packageID
+read -p "press enter the packageID: " packageID
+export CC_PACKAGE_ID=$packageID
 
 # approve the  a definition of the the chaincode for Org3
 # use the --package-id flag to provide the package identifier
@@ -53,7 +54,8 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 peer chaincode query -C mychannel -n basic -c '{"Args":["GetAllAssets"]}'
 
 popd
-<<cat EOF
+
+cat <<EOF
     Succefully added the third org and deployed chaincode on it.  
 EOF
 
