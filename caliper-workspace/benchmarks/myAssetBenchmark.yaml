@@ -11,7 +11,7 @@ test:
     txDuration: 60
     workload:
       arguments:
-        assets: 10
+        assets: 100
         contractId: basic
       module: workload/readAsset.js
   workers:

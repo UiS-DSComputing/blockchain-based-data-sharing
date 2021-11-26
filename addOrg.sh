@@ -11,7 +11,7 @@ pushd ../test-network
 popd
 
 pushd ../test-network/addOrg3
-./addOrg3.sh up -c channel1
+./addOrg3.sh up -c mychannel -s couchdb
 popd
 
 pushd ../test-network
@@ -33,8 +33,10 @@ peer lifecycle chaincode install basic.tar.gz
 
 # query packageID
 peer lifecycle chaincode queryinstalled
-# TODO set the env to the packageID, like so:
-# export CC_PACKAGE_ID=basic_1:5443b5b557efd3faece8723883d28d6f7026c0bf12245de109b89c5c4fe64887
+
+
+read -p "press enter the packageID" packageID 
+export CC_PACKAGE_ID=packageID
 
 # approve the  a definition of the the chaincode for Org3
 # use the --package-id flag to provide the package identifier
@@ -49,8 +51,10 @@ peer lifecycle chaincode querycommitted --channelID mychannel --name basic --caf
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" --peerAddresses localhost:11051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt" -c '{"function":"InitLedger","Args":[]}'
 # veirfy
 peer chaincode query -C mychannel -n basic -c '{"Args":["GetAllAssets"]}'
-popd
 
+popd
 <<cat EOF
-Succefully added the third org and deployed chaincode on it.    
+    Succefully added the third org and deployed chaincode on it.  
 EOF
+
+
