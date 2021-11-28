@@ -12,7 +12,8 @@ export FABRIC_CFG_PATH=${PWD}/../config/
 
 export CORE_PEER_LOCALMSPID="OrdererMSP"
 export CH_NAME="mychannel"
-export TLS_ROOT_CA=${PWD}/organizations/ordererOrganizations/example.com/users/Admin@example.com/tls/ca.crt
+#export TLS_ROOT_CA=${PWD}/organizations/ordererOrganizations/example.com/users/Admin@example.com/tls/ca.crt 
+export TLS_ROOT_CA=${PWD}/organizations/ordererOrganizations/example.com/users/Admin@example.com/msp/cacerts/localhost-9054-ca-orderer.pem
 export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp
 export ORDERER_CONTAINER=localhost:7050
