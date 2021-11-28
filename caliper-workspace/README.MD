@@ -14,7 +14,7 @@ The size of data set varies as follow:<br>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Requiremnts
+## Requirements
 
 Install the Fabric tools and add them to PATH:<br/>
 
@@ -30,11 +30,23 @@ cd fabric-samples/my-simple-offchain
 ./start.sh
 ```
 
+In addition, you will need to install:<br>
+- Python >= 3.8.x
+- pip3
+
+
+Finally, run the following command to install the necessary python libraries:
+
+```shell
+python3 -m pip3 install -r requirements.txt
+```
+
+
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Run the benchmarking module
+## Benchmark our chaincode
 
 ```shell
 cd caliper-worksapce

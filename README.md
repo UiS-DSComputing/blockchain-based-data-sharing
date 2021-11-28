@@ -1,5 +1,5 @@
 # Blockchain empowered data management
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 This project is a demo application for experiment with [Hyperledger](https://www.hyperledger.org/) blockchain technology. We specifically design an off-chain storage model, where we use a [MySql](https://www.mysql.com/) database to store data and submit light-weighted transactions to the blockchain with only the hash of data.<br/>
 
@@ -7,7 +7,7 @@ Please be aware that this project contains a Fabric chaincode, application, and 
 
 
 
-### To compiling our demo projcet
+## Requirements
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 This project is implemented in [Go](https://golang.org/). In addition, we have implemneted an API to an communicate with a MySql server.<br/>
 You need to have a fabric network running with at least two peer organizations and an ordering service.<br/>
@@ -21,8 +21,7 @@ However, fabric provides a [test network](https://hyperledger-fabric.readthedocs
 
 
 
-
-### Run the demo
+## Run our demo application
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Start the MySql server by `/your-path-to-bin/mysql -u username -p password`, by replacing username and password with yours.<br>
