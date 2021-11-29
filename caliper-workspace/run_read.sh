@@ -18,6 +18,12 @@ clean_up()
     rm -rf ../test-network/config_block.pb
 } 
 
+declare -a sizes=('data1024B' 'data2kB' 'data3kB' 'data4kB' 'data5kB')
+declare -a clients=('2' '10' '20' '50')
+declare -a tps=('25' '50' '100' '200')
+
+# reconfigure the network config file with new secret key
+python3 -c "import bench_config; bench_config.reconfig_network()"
 
 # 1 - benchmark different combinations of tps, number of clients, and data sizes (takes more than 4 hours).
 for i in "${sizes[@]}"; do
@@ -33,7 +39,7 @@ for i in "${sizes[@]}"; do
             sleep 10
             # run the caliper cli
             npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml \
-            --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
+            --caliper-benchconfig benchmarks/bench_read.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
             --caliper-report-path results/report_"$i"_"$j"_c_"$h"_tps.html
             # sleep for 5 sec before restarting
             sleep 5
@@ -43,15 +49,9 @@ done
 
 
 # 2 - benchmark for network 3 org
-declare -a sizes=('data1024B' 'data2kB' 'data3kB' 'data4kB' 'data5kB')
-declare -a clients=('2' '10' '20' '50')
-declare -a tps=('25' '50' '100' '200')
-
-# reconfigure the network config file with new secret key
-python3 -c "import bench_config; bench_config.reconfig_network()"
 
 # Totally reset the network and add the third organization and deploy it on the channel  (takes more than 2 hours).
-pushd ../my-off-cc/addOrg.sh
+pushd ../my-off-cc
 ./addOrg.sh
 popd
 
@@ -68,7 +68,7 @@ for h in "${tps[@]}"; do
     sleep 5
     # run the caliper cli
     npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml \
-    --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
+    --caliper-benchconfig benchmarks/bench_read.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
     --caliper-report-path results/report_3org_BSc_20_xxx_1024kb_10cli_"$h"_tps.html
     # sleep for 5 sec before restarting
     sleep 5
@@ -111,7 +111,7 @@ for i in "${blockSizes[@]}"; do
         echo "Benchmarking..."
         # run the caliper cli
         npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml \
-        --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
+        --caliper-benchconfig benchmarks/bench_read.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled \
         --caliper-report-path results_bs/report_3org_1024kb_50cli_"$i"_bsize__"$j"_btimeout.html
         # sleep for 5 sec before restarting
         sleep 5
