@@ -114,5 +114,13 @@ func (oc *OffchainDB) ReadAllData() error {
 	return nil
 }
 
-
-
+// DeleteData deletes data from the database given its hash.
+func (oc *OffchainDB) DeleteData(ID string) error {
+	results, err := oc.Conn.Query("DELETE Offdata FROM linkdata where ID=?", ID)
+	if err != nil {
+		fmt.Printf("Something went wrong while trying to select from database.\n%v",err)
+		return err
+	}
+	defer results.Close() 
+	return nil
+}
