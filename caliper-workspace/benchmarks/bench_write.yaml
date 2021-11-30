@@ -3,16 +3,16 @@ test:
   name: basic-contract-benchmark
   rounds:
     - label: writeAsset
-      txNumber: 1000
+      txNumber: 2000
       rateControl:
         type: fixed-rate
         opts:
           tps: 1000
       workload:
         arguments:
-          assets: 1000
+          assets: 5000
           contractId: basic
         module: workload/writeAsset.js
   workers:
-    number: 2
+    number: 10
     type: local

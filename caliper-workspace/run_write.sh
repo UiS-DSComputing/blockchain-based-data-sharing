@@ -18,12 +18,12 @@ clean_up()
     rm -rf ../test-network/config_block.pb
 } 
 
-declare -a sizes=('data1024B' 'data2kB' 'data3kB' 'data4kB' 'data5kB')
+declare -a sizes=('data1024B' 'data2kB' 'data3kB' 'data4kB' 'data5kB' 'data8kB')
 
 # reconfigure the network config file with new secret key
 python3 -c "import bench_config; bench_config.reconfig_network()"
 
-# 1 - benchmark different data sizes.
+# 1 - benchmark different data sizes (takes more than 2 hours).
 for i in "${sizes[@]}"; do
     export COLLECTION_TYPE="$i"
     echo "Running tests for collection: $i, nr of clients: 10, and fixed tps rate: 1000"
@@ -38,7 +38,7 @@ done
 
 # 2 - benchmark for network 3 org
 
-# Totally reset the network and add the third organization and deploy it on the channel  (takes more than 2 hours).
+# Totally reset the network and add the third organization and deploy it on the channel (takes more than 2 hours).
 pushd ../my-off-cc
 ./addorg.sh
 popd
@@ -62,7 +62,7 @@ done
 clean_up
 
 
-# 3 - benchmark by changing block size by varying batch timeout and batch size  (takes more than 4 hours).
+# 3 - benchmark by changing block size by varying batch timeout and batch size (takes more normally 6280 seconds).
 declare -a blockSizes=('10' '100' '250' '500')
 declare -a batchTimeOuts=('1s' '2s' '3s' '4s')
 export COLLECTION_TYPE="data1024B"

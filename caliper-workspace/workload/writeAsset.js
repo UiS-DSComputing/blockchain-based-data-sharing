@@ -36,7 +36,7 @@ class MyWorkload extends WorkloadModuleBase {
         }
         this.randomIds.push(randomId);
         const assetID = `${this.workerIndex}_${randomId}` + this.data;
-        console.log(`Worker ${this.workerIndex}: Creating asset ${assetID}`);
+        //console.log(`Worker ${this.workerIndex}: Creating asset ${assetID}`);
         const myArgs = {
             contractId: this.roundArguments.contractId,
             contractFunction: 'CreateAsset',
@@ -53,7 +53,7 @@ class MyWorkload extends WorkloadModuleBase {
             // check if asset exist
             if (this.randomIds.includes(i)) {
                 const assetID = `${this.workerIndex}_${i}` + this.data;
-                console.log(`Worker ${this.workerIndex}: Deleting asset ${assetID}`);
+                //console.log(`Worker ${this.workerIndex}: Deleting asset ${assetID}`);
                 const request = {
                     contractId: this.roundArguments.contractId,
                     contractFunction: 'DeleteAsset',
@@ -75,13 +75,14 @@ class MyWorkload extends WorkloadModuleBase {
         await this.sutAdapter.sendRequests(request);
     }
 }
-
 const chaindata = {
     'data1024B': "a".repeat(1024),
-    'data2kB': "a".repeat(2048),
-    'data3kB': "a".repeat(3056),
-    'data4kB': "a".repeat(4128),
-    'data5kB': "a".repeat(5120),
+    'data2kB': "a".repeat(2000),
+    'data3kB': "a".repeat(3000),
+    'data4kB': "a".repeat(4000),
+    'data5kB': "a".repeat(5000),
+    'data6kB': "a".repeat(6000),
+    'data8kB': "a".repeat(8000),
 };
 
 function createWorkloadModule() {

@@ -3,10 +3,13 @@
 # Exit on first error
 set -e
 
+# clean out any old identites in the wallets
+rm -rf application-go/wallet/*
 
 # launch network; create channel, join peers with the channel, and add third org
 pushd ../test-network
 ./network.sh down
+docker system prune --volumes -f
 ./network.sh up createChannel -ca -s couchdb
 popd
 
@@ -36,7 +39,7 @@ peer lifecycle chaincode install basic.tar.gz
 peer lifecycle chaincode queryinstalled
 
 
-read -p "press enter the packageID: " packageID
+read -t 600 -p "please enter the packageID: " packageID
 export CC_PACKAGE_ID=$packageID
 
 # approve the  a definition of the the chaincode for Org3
@@ -58,5 +61,3 @@ popd
 cat <<EOF
     Succefully added the third org and deployed chaincode on it.  
 EOF
-
-
