@@ -23,7 +23,7 @@ declare -a sizes=('data1024B' 'data2kB' 'data3kB' 'data4kB' 'data5kB' 'data8kB')
 # reconfigure the network config file with new secret key
 python3 -c "import bench_config; bench_config.reconfig_network()"
 
-# 1 - benchmark different data sizes (takes more than 2 hours).
+# 1 - benchmark different data sizes (takes more than 14937).
 for i in "${sizes[@]}"; do
     export COLLECTION_TYPE="$i"
     echo "Running tests for collection: $i, nr of clients: 10, and fixed tps rate: 1000"
@@ -62,8 +62,8 @@ done
 clean_up
 
 
-# 3 - benchmark by changing block size by varying batch timeout and batch size (takes more normally 6280 seconds).
-declare -a blockSizes=('10' '100' '250' '500')
+# 3 - benchmark by changing block size by varying batch timeout and batch size (takes normally 15000 seconds).
+declare -a blockSizes=('10' '100' '250' '500' '600' '700' '800' '900' '1000')
 declare -a batchTimeOuts=('1s' '2s' '3s' '4s')
 export COLLECTION_TYPE="data1024B"
 python3 -c "import bench_config; bench_config.reconfig_network()"
