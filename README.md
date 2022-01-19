@@ -1,4 +1,4 @@
-# Blockchain empowered data management
+# Blockchain empowered data sharing
 
 
 This project is a demo application for experiment with [Hyperledger](https://www.hyperledger.org/) blockchain technology. We specifically design an off-chain storage model, where we use a [MySql](https://www.mysql.com/) database to store data and submit light-weighted transactions to the blockchain with only the hash of data.<br/>
